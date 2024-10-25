@@ -4,6 +4,9 @@ import './style.css';
 // Import three.js
 import * as THREE from 'three';
 
+// Import orbit controls
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+
 // Create scene
 const scene = new THREE.Scene();
 
@@ -31,9 +34,13 @@ scene.add( cube );
 // Set camera position
 camera.position.z = 5;
 
+// Orbit controls
+const controls = new OrbitControls( camera, renderer.domElement );
+controls.enableDamping = true;
+
 // Add animation
 function animate() {
-  cube.rotation.x += 0.01;
-  cube.rotation.y += 0.01;
+  // cube.rotation.x += 0.01;
+  // cube.rotation.y += 0.01;
   renderer.render( scene, camera );
 }
