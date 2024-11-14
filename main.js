@@ -44,49 +44,68 @@ directionalLight.castShadow = true;
 scene.add( directionalLight );
 
 // Create back wall cube
-const backWallgeometry = new THREE.BoxGeometry( 6, 1, .1 ); // width, height, depth
-const backWallmaterial = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-const backWallcube = new THREE.Mesh( backWallgeometry, backWallmaterial );
+const backWallGeometry = new THREE.BoxGeometry( 4.9, 1, .1 ); // width, height, depth
+const backWallMaterial = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+const backWallCube = new THREE.Mesh( backWallGeometry, backWallMaterial );
 
 // Set back wall cube position
-backWallcube.position.z = -2.479;
+backWallCube.position.z = -2.52;
+backWallCube.position.x = .4;
 
 // Add cube to scene
-scene.add( backWallcube );
+scene.add( backWallCube );
 
 // Add left side wall cube
-const leftWallgeometry = new THREE.BoxGeometry( .1, 1, 5 ); // width, height, depth
-const leftWallmaterial = new THREE.MeshBasicMaterial( { color: 0x00ffff } );
-const leftWallcube = new THREE.Mesh( leftWallgeometry, leftWallmaterial );
+const leftWallGeometry = new THREE.BoxGeometry( .1, 1, 4.9 ); // width, height, depth
+const leftWallMaterial = new THREE.MeshBasicMaterial( { color: 0x00ffff } );
+const leftWallCube = new THREE.Mesh( leftWallGeometry, leftWallMaterial );
 
 // Set left wall cube position
-leftWallcube.position.x = -3.05;
+leftWallCube.position.x = -2;
+leftWallCube.position.z = -.1;
 
 // Add cube to scene
-scene.add( leftWallcube );
+scene.add( leftWallCube );
 
 // Add right side wall cube
-const rightWallgeometry = new THREE.BoxGeometry( .1, 1, 5 ); // width, height, depth
-const rightWallmaterial = new THREE.MeshBasicMaterial( { color: 0x00ffff } );
-const rightWallcube = new THREE.Mesh( rightWallgeometry, rightWallmaterial );
+const rightWallGeometry = new THREE.BoxGeometry( .1, 1, 4.9 ); // width, height, depth
+const rightWallMaterial = new THREE.MeshBasicMaterial( { color: 0x00ffff } );
+const rightWallCube = new THREE.Mesh( rightWallGeometry, rightWallMaterial );
 
 // Set right wall cube position
-rightWallcube.position.x = 3.05;
+rightWallCube.position.x = 2.8;
+rightWallCube.position.z = -.1;
 
 // Add cube to scene
-scene.add( rightWallcube );
+scene.add( rightWallCube );
 
 // Add front wall cube
-const frontWallgeometry = new THREE.BoxGeometry( 5, 1, .1 ); // width, height, depth
-const frontWallmaterial = new THREE.MeshBasicMaterial( { color: 0xffff00  } );
-const frontWallcube = new THREE.Mesh( frontWallgeometry, frontWallmaterial );
+const frontWallGeometry = new THREE.BoxGeometry( 3.9, 1, .1 ); // width, height, depth
+const frontWallMaterial = new THREE.MeshBasicMaterial( { color: 0xffff00  } );
+const frontWallCube = new THREE.Mesh( frontWallGeometry, frontWallMaterial );
 
 // Set front wall cube position
-frontWallcube.position.z = 2.479;
-frontWallcube.position.x = -0.5;
+frontWallCube.position.z = 2.32;
+frontWallCube.position.x = .8;
 
 // Add cube to scene
-scene.add( frontWallcube );
+scene.add( frontWallCube );
+
+// Add ceiling wall cube
+const roofGeometry = new THREE.ConeGeometry( 3.5, 1, 4 ); 
+const roofMaterial = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
+const roofCube = new THREE.Mesh( roofGeometry, roofMaterial );
+
+// Set roof cube position
+
+roofCube.rotation.y = Math.PI / 4;
+
+roofCube.position.x = Math.PI / 8;
+roofCube.position.y = Math.PI / 3.1;
+roofCube.position.z = -0.1;
+
+// Add cube to scene
+scene.add( roofCube );
 
 // Add a plane
 const planeGeometry = new THREE.PlaneGeometry( 10, 10 );
