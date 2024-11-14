@@ -227,13 +227,13 @@ camera.position.z = 5;
 const controls = new OrbitControls( camera, renderer.domElement );
 controls.enableDamping = true;
 
-// Axes helper
-const axesHelper = new THREE.AxesHelper( 5 );
-scene.add( axesHelper );
+// // Axes helper
+// const axesHelper = new THREE.AxesHelper( 5 );
+// scene.add( axesHelper );
 
-// Directional lights helper
-const directionalLightsHelper = new THREE.DirectionalLightHelper( directionalLight, 5 );
-scene.add( directionalLightsHelper );
+// // Directional lights helper
+// const directionalLightsHelper = new THREE.DirectionalLightHelper( directionalLight, 5 );
+// scene.add( directionalLightsHelper );
 
 // Add animation
 function animate() {
