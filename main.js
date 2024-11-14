@@ -7,6 +7,10 @@ import * as THREE from 'three';
 // Import orbit controls
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
+// Import text
+import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
+import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
+
 // Create scene
 const scene = new THREE.Scene();
 
@@ -45,7 +49,7 @@ scene.add( directionalLight );
 
 // Create back wall cube
 const backWallGeometry = new THREE.BoxGeometry( 4.9, 1, .1 ); // width, height, depth
-const backWallMaterial = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+const backWallMaterial = new THREE.MeshBasicMaterial( { color: 0x76808f  } );
 const backWallCube = new THREE.Mesh( backWallGeometry, backWallMaterial );
 
 // Set back wall cube position
@@ -57,7 +61,7 @@ scene.add( backWallCube );
 
 // Add left side wall cube
 const leftWallGeometry = new THREE.BoxGeometry( .1, 1, 4.9 ); // width, height, depth
-const leftWallMaterial = new THREE.MeshBasicMaterial( { color: 0x00ffff } );
+const leftWallMaterial = new THREE.MeshBasicMaterial( { color: 0x76808f  } );
 const leftWallCube = new THREE.Mesh( leftWallGeometry, leftWallMaterial );
 
 // Set left wall cube position
@@ -69,7 +73,7 @@ scene.add( leftWallCube );
 
 // Add right side wall cube
 const rightWallGeometry = new THREE.BoxGeometry( .1, 1, 4.9 ); // width, height, depth
-const rightWallMaterial = new THREE.MeshBasicMaterial( { color: 0x00ffff } );
+const rightWallMaterial = new THREE.MeshBasicMaterial( { color: 0x76808f  } );
 const rightWallCube = new THREE.Mesh( rightWallGeometry, rightWallMaterial );
 
 // Set right wall cube position
@@ -81,7 +85,7 @@ scene.add( rightWallCube );
 
 // Add front wall cube
 const frontWallGeometry = new THREE.BoxGeometry( 3.9, 1, .1 ); // width, height, depth
-const frontWallMaterial = new THREE.MeshBasicMaterial( { color: 0xffff00  } );
+const frontWallMaterial = new THREE.MeshBasicMaterial( { color: 0x76808f    } );
 const frontWallCube = new THREE.Mesh( frontWallGeometry, frontWallMaterial );
 
 // Set front wall cube position
@@ -93,7 +97,7 @@ scene.add( frontWallCube );
 
 // Add ceiling wall cube
 const roofGeometry = new THREE.ConeGeometry( 3.5, 1, 4 ); 
-const roofMaterial = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
+const roofMaterial = new THREE.MeshBasicMaterial( { color: 0x393c3e   } );
 const roofCube = new THREE.Mesh( roofGeometry, roofMaterial );
 
 // Set roof cube position
@@ -122,6 +126,47 @@ painting.position.z = -2.46;
 
 // Add painting to scene
 scene.add( painting );
+
+// Add text
+// Font loader
+const fontLoader = new FontLoader();
+fontLoader.load('./Halcom_Regular.json', function(font) {
+  // Create text geometry
+  const textGeometry = new TextGeometry('Kevin Malekera', {
+    font: font,
+    size: 0.2,
+    height: 0.2,
+  });
+
+  const textMaterial = new THREE.MeshStandardMaterial({ color: 0x02314d  });
+  const textMesh = new THREE.Mesh(textGeometry, textMaterial);
+
+  // Position the text
+  textMesh.position.set(-1, 0, 2.5);
+
+  // Calculate the bounding box of the text to size the background plane
+  textGeometry.computeBoundingBox();
+  const boundingBox = textGeometry.boundingBox;
+  const textWidth = boundingBox.max.x - boundingBox.min.x;
+  const textHeight = boundingBox.max.y - boundingBox.min.y;
+
+  // Create a background plane slightly larger than the text dimensions
+  const backgroundGeometry = new THREE.PlaneGeometry(textWidth + 0.1, textHeight + 0.1);
+  const backgroundMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff }); // Set desired background color
+  const backgroundPlane = new THREE.Mesh(backgroundGeometry, backgroundMaterial);
+
+  // Position the background plane behind the text
+  backgroundPlane.position.set(
+    textMesh.position.x + textWidth / 2,
+    textMesh.position.y + textHeight / 2,
+    textMesh.position.z - 0.1 // Move slightly behind the text
+  );
+
+  // Add both text and background plane to the scene
+  scene.add(backgroundPlane);
+  scene.add(textMesh);
+});
+
 
 // Add a plane
 const planeGeometry = new THREE.PlaneGeometry( 10, 10 );
