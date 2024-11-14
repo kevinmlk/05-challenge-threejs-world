@@ -107,6 +107,22 @@ roofCube.position.z = -0.1;
 // Add cube to scene
 scene.add( roofCube );
 
+// Add painting
+// Load texture
+const textureLoader = new THREE.TextureLoader();
+const paintingTexture = textureLoader.load( './rickroll.jpg' );
+
+// Create painting
+const paintingGeometry = new THREE.BoxGeometry( 1, .5, 0.02 );
+const paintingMaterial = new THREE.MeshStandardMaterial( { color: 0xffffff, map: paintingTexture } );
+const painting = new THREE.Mesh( paintingGeometry, paintingMaterial );
+
+// Set painting position
+painting.position.z = -2.46;
+
+// Add painting to scene
+scene.add( painting );
+
 // Add a plane
 const planeGeometry = new THREE.PlaneGeometry( 10, 10 );
 const planeMaterial = new THREE.MeshBasicMaterial( { color: 0xffffff } );
