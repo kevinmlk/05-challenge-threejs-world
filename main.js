@@ -167,6 +167,43 @@ fontLoader.load('./Halcom_Regular.json', function(font) {
   scene.add(textMesh);
 });
 
+// Add trees
+// Tree creation function
+function createTree(position = { x: 0, y: 0, z: 0 }, scale = 1) {
+  const trunkGeometry = new THREE.CylinderGeometry(0.1 * scale, 0.1 * scale, 1 * scale, 12);
+  const trunkMaterial = new THREE.MeshStandardMaterial({ color: 0x8b5a2b });
+  const trunk = new THREE.Mesh(trunkGeometry, trunkMaterial);
+  const foliageGeometry = new THREE.SphereGeometry(0.5 * scale, 16, 16);
+  const foliageMaterial = new THREE.MeshStandardMaterial({ color: 0x228b22 });
+  const foliage = new THREE.Mesh(foliageGeometry, foliageMaterial);
+
+  trunk.position.set(position.x, position.y + (0.5 * scale), position.z);
+  foliage.position.set(position.x, position.y + (1 * scale), position.z);
+
+  trunk.castShadow = true;
+  foliage.castShadow = true;
+
+  const tree = new THREE.Group();
+  tree.add(trunk);
+  tree.add(foliage);
+
+  scene.add(tree);
+}
+
+// Adding multiple trees
+const treePositions = [
+  { x: -3, y: -.5, z: -3 },
+  { x: 1, y: -.5, z: 4 },
+  { x: 4, y: -.5, z: -1 },
+  { x: -3, y: -.5, z: 2 }
+];
+
+treePositions.forEach((position) => {
+  const scale = 0.5 + Math.random() * 0.5;
+  createTree(position, scale);
+});
+
+
 
 // Add a plane
 const planeGeometry = new THREE.PlaneGeometry( 10, 10 );
